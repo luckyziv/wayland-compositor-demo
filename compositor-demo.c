@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     server.wl_display = wl_display_create();
     server.wl_event_loop = wl_display_get_event_loop(server.wl_display);
 
-    server.backend = wlr_backend_autocreate(server.wl_display);
+    server.backend = wlr_backend_autocreate(server.wl_display, NULL);
     if (!wlr_backend_start(server.backend)) {
         fprintf(stderr, "Failed to start backedn\n");
         wl_display_destroy(server.wl_display);

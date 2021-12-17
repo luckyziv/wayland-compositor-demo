@@ -2,10 +2,13 @@ WAYLAND = -lwayland-server
 CFLAGS = -lrt
 FF = compositor-demo.c
 CC = gcc
-INC_CLUDE = -I/usr/include/wlr
+
+# INCLUDE = -I/usr/include/wlr
+LIB_PATH = -L/usr/lib//usr/lib/x86_64-linux-gnu/ -lwlroots
+#libwlroots.so
 
 compositor-demo: $(FF)
-	$(CC) -o compositor-demo $(FF) $(WAYLAND) $(CFLAGS) $(INCLUDE)
+	$(CC) -o compositor-demo $(FF) $(WAYLAND) $(CFLAGS) $(INCLUDE) $(LIB_PATH)
 
 .PHONY: clean
 clean:
