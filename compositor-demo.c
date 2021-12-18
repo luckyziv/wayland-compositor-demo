@@ -92,6 +92,8 @@ static void new_output_notify(struct wl_listener *listener, void *data)
     // add listener for new frame
     output->frame.notify = output_frame_notiry;
     wl_signal_add(&wlr_output->events.frame, &output->frame);
+
+    wlr_output_create_global(wlr_output);
 };
 
 int main(int argc, char **argv)
