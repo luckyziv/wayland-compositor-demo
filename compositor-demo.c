@@ -6,7 +6,12 @@
 //wlroot headers
 #include <wlr/backend.h>
 #include <wlr/types/wlr_output.h>
+#include <wlr/types/wlr_gamma_control_v1.h>
+#include <wlr/types/wlr_screencopy_v1.h>
+#include <wlr/types/wlr_primary_selection_v1.h>
+#include <wlr/types/wlr_idle.h>
 #include <wlr/render/wlr_renderer.h>
+#include <wlr/backend/drm.h>
 
 //wayland protocol
 #include <wayland-server.h>
@@ -114,6 +119,12 @@ int main(int argc, char **argv)
 
     printf("Running compositor on wayland display '%s'\n", socket);
     setenv("WAYLAND_DISPLAY", socket, true);
+
+    wl_display_init_shm(server.wl_display);
+    wlr_gamma_control_manager_v1_create(server.wl_display);
+    wlr_screencopy_manager_v1_create(server.wl_display);
+    wlr_primary_selection_v1_device_manager_create(server.wl_display);
+    wlr_idle_create(server.wl_display);
 
     wl_display_run(server.wl_display);
     wl_display_destroy(server.wl_display);
